@@ -1,86 +1,44 @@
 {
-  "name": "@formspree/react",
-  "version": "2.2.3",
-  "description": "The React component library for Formspree",
-  "bugs": {
-    "url": "https://github.com/formspree/formspree-react/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/formspree/formspree-react.git"
-  },
-  "license": "MIT",
-  "author": "Derrick Reimer",
-  "files": [
-    "dist/**/*.{js,ts}"
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
   ],
-  "main": "dist/formspree-react.cjs.js",
-  "module": "dist/formspree-react.esm.js",
-  "types": "dist/types/src/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && npm run build:types && npm run build:js",
-    "build:js": "rollup -c",
-    "build:types": "tsc --emitDeclarationOnly",
-    "format": "npx prettier --write 'src/**/*.{js,ts}'",
-    "prepare": "npm run build",
-    "release": "np",
-    "test": "jest",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx,css,json,md}": [
-      "npx prettier --write",
-      "git add"
-    ],
-    "package.json": [
-      "npx sort-package-json",
-      "git add"
-    ]
-  },
-  "dependencies": {
-    "@formspree/core": "^2.6.1"
+    "build": "turbo run build",
+    "changeset": "changeset",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "dev": "turbo run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "prepare": "husky install",
+    "prerelease": "turbo run build --filter=\"./packages/*\"",
+    "release": "changeset publish",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "version-packages": "changeset version"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.7.7",
-    "@babel/runtime": "^7.6.3",
-    "@types/jest": "^24.0.25",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "babel-jest": "^26.3.0",
-    "husky": "^3.0.5",
-    "jest": "^26.4.2",
-    "lint-staged": "^9.2.5",
-    "np": "^6.4.0",
-    "prettier": "^1.18.2",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-test-renderer": "^16.10.2",
-    "rollup": "^1.17.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "sort-package-json": "^1.22.1",
-    "tslib": "^1.10.0",
-    "typescript": "^3.7.4"
-  },
-  "peerDependencies": {
-    "react": ">= 16.8.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "np": {
-    "yarn": false
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@changesets/cli": "^2.22.0",
+    "@types/jest": "^29.5.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "babel-jest": "^29.5.0",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest": "^27.2.2",
+    "husky": "^8.0.0",
+    "isomorphic-fetch": "^3.0.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
+    "sort-package-json": "^2.4.1",
+    "tsup": "^6.2.2",
+    "turbo": "latest",
+    "typescript": "^5.1.3"
   }
 }
